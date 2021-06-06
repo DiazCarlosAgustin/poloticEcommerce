@@ -48,7 +48,7 @@ class RegisterForm(forms.Form):
         return email
 
     def clean(self):
-        cleaned_data = super().clear()
+        cleaned_data = super().clean()
 
         if cleaned_data.get('password2') != cleaned_data.get('password'):
             self.add_error('password2','La contraseña no coincide.')

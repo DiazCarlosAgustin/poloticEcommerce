@@ -19,6 +19,8 @@ def logout_view(request):
 
 
 def login_view(request):
+    if(request.user.is_authenticated):
+        redirect('/')
     form = LoginForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
@@ -36,6 +38,8 @@ def login_view(request):
     })
 
 def register_view(request):
+    if(request.user.is_authenticated):
+        redirect('/')
     form = RegisterForm(request.POST or None) #si es por el metodo post guardar los datos del usuario, si no dejar vacio
 
     if request.method == 'POST' and form.is_valid():

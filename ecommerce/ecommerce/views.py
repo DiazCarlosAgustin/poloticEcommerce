@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -8,9 +7,16 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 
 from .forms import RegisterForm, LoginForm
+
+from products.models import Product
 # show index
 def index(request):
-    return render(request, 'index.html',{})
+    Productos = Product.objects.all()
+    last_product = Product.objects.all().order_by('-created_at')[:4]
+    return render(request, 'index.html',{
+        "products": Productos,
+        "last_products": last_product,
+    })
 
 def logout_view(request):
     logout(request)

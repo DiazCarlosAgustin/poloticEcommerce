@@ -6,18 +6,7 @@
         </div>
         <div class="row last-products">
             {% for producto in last_products %}
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="card">
-                        <img src="{{producto.imagen.url}}" class="card-img-top" alt="{{producto.titulo}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{producto.titulo}}</h5>
-                            <p class="card-text">${{producto.precio}}</p>
-                            <a href="#" class="btn btn-primary align-middle w-100">
-                                Ver
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'cardProduct.html' with producto=producto %}
             {% endfor %}
         </div>
     </div>
@@ -29,18 +18,7 @@
         </div>
         <div class="row more-products">
             {% for producto in products %}
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="card">
-                        <img src="{{producto.imagen.url}}" class="card-img-top" alt="{{producto.titulo}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{producto.titulo}}</h5>
-                            <p class="card-text">${{producto.precio}}</p>
-                            <a href="" class="btn btn-primary align-middle w-100">
-                               Ver
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'cardProduct.html' with producto=producto %}
             {% endfor %}
         </div>
     </div>

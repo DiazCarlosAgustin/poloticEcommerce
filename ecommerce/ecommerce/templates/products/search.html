@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <h1>Busqueda de productos</h1>
+        <hr />
+        <div class="col-12 my-3">
+             <p>Resultados para: {{query}}</p>
+            <div class="row more-products">
+                {% for producto in product_list %}
+                    {% include 'cardProduct.html' with producto=producto %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

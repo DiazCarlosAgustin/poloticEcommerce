@@ -1,10 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
-
+from products.forms import ProductForm
 from django.contrib import messages
-
 from django.contrib.auth import logout, login
-from django.contrib.auth.models import User
 
 from .forms import RegisterForm, LoginForm
 
@@ -26,7 +23,7 @@ def logout_view(request):
 
 def login_view(request):
     if(request.user.is_authenticated):
-        redirect('/')
+        redirect('home')
     form = LoginForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
@@ -35,7 +32,7 @@ def login_view(request):
         if user:
             login(request, user)
             messages.success(request, 'Se inicio sesion correctamente.')
-            return redirect(index)
+            return redirect('home')
         else:
             messages.warning(request, 'El usuario o contraseña es incorrecta.')
 
@@ -45,7 +42,7 @@ def login_view(request):
 
 def register_view(request):
     if(request.user.is_authenticated):
-        redirect('/')
+        redirect('home')
     form = RegisterForm(request.POST or None) #si es por el metodo post guardar los datos del usuario, si no dejar vacio
 
     if request.method == 'POST' and form.is_valid():
@@ -54,8 +51,24 @@ def register_view(request):
         if user:
             login(request, user)
             messages.success(request, 'Se registro correctamente')
-            return redirect('index')
+            return redirect('home')
         
     return render(request, 'user/register.html',{
         'form': form
     })
+
+def about(request):
+    return render(request,'about.html', {})
+
+def createProduct(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=Product(imagen=request.FILES['imagen']))
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ProductForm()
+        return render(request, 'products/newProduct.html',{
+            'form':form,
+        })
+    

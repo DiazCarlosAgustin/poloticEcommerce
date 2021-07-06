@@ -2,8 +2,36 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-12">
-            <h2>{{product.titulo}}</h2>
+        <div class="col-12 text-center p-3">
+            <h1 class="h1">{{product.titulo}}</h1>
+        </div>
+        <div class="col-12 col-md-6">
+            <img src="{{product.imagen.url}}" class="w-100 h-100" alt="{{product.titulo}}">
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="w-100 p-3">
+                <strong>Categoria: </strong>{{product.categoria}}
+            </div>
+            <div class="w-100 p-3">
+                <strong>Descripcion: </strong>{{product.descripcion}}
+            </div>
+            <div class="w-100 p-3">
+                <strong>Precio: </strong>${{product.precio}}
+            </div>
+
+            <div class="w-100 p-3">
+                <a href="{% url 'cart:add_cart' product.slug %}" class="btn btn-primary">Agregar al carrito</a>
+            </div>
+            {% if user.is_staff %}
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{% url 'productos:editaProducto' product.id %}" class="btn btn-success w-100">Editar</a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url 'productos:eliminarProducto' product.id %}" class="btn btn-danger w-100">Eliminar</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}

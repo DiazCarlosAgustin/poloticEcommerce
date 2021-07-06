@@ -4,7 +4,8 @@
         <div class="card-body">
             <h5 class="card-title">{{producto.titulo}}</h5>
             <p class="card-text">${{producto.precio}}</p>
-            <a href="#" class="btn btn-primary align-middle w-100">
+            <p>{{producto.slug}}</p>
+            <a href="{% url 'productos:producto' producto.slug %}" class="btn btn-primary align-middle w-100">
                 Ver
             </a>
         </div>

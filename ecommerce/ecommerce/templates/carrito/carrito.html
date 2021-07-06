@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{user}}</h1>
+<div class="table-responsive">
+    <table class="table table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{item.productos}}</td>
+                    <td>${{item.productos.precio}}</td>
+                    <td>
+                        <a href="{% url 'cart:remove_cart' item.id %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+  <div class="p-2">
+    <h3 class="text-left">Total: ${{total}}</h3>
+  </div>
+  <div class="p-2 d-flex justify-content-end">
+    <a href="{% url 'cart:clear_cart' %}" class="btn">Vaciar carrito</a>
+    <button class="btn btn-primary">Finaliza Compra</button>
+  </div>
+{% endblock %}

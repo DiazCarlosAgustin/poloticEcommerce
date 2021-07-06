@@ -1,0 +1,10 @@
+<div class="nav-item dropdown text-center">
+    <span class="nav-link text-dark dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Categorias
+    </span>
+    <ul class="dropdown-menu w-100 text-center" aria-labelledby="navbarDropdown">
+      {% for categoria in categorias %}
+        <li><a class="dropdown-item" href="{% url 'categorias:categorias' categoria.id %}">{{categoria.descripcion}}</a></li>
+      {% endfor %}
+    </ul>
+</div>
